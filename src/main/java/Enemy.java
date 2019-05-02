@@ -9,11 +9,14 @@
 //
 
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 
 public class Enemy extends GlobalPosition{
   
@@ -25,7 +28,8 @@ public class Enemy extends GlobalPosition{
   int velX;
   int velY;
   
-  Color enemyColor;
+  //Color enemyColor;
+  private String enemyImage = "/images/enemy.png";
   ArrayList<Color> colorList = new ArrayList<Color>();
   Random randomGen = new Random();
   Rectangle enemyRect;
@@ -35,7 +39,6 @@ public class Enemy extends GlobalPosition{
     enemyRect = new Rectangle(x, y, 31, 31);
     for(int i = 0; i < 100; i++){
       colorList.add(new Color(randomGen.nextInt(255), randomGen.nextInt(255), randomGen.nextInt(255)));
-      enemyColor = colorList.get(randomGen.nextInt(colorList.size()));
     }
     
     this.velX = velX;
@@ -49,6 +52,12 @@ public class Enemy extends GlobalPosition{
   
   public Rectangle getBounds(){
     return new Rectangle(x, y, 30, 30);
+  }
+  
+  public Image getEnemyImage(){
+	ImageIcon i = new ImageIcon(getClass().getResource(enemyImage));
+	Image newImage = Game.resizeImage(i.getImage(), 30, 30);
+	return newImage;
   }
   
   public void update(){
@@ -77,9 +86,6 @@ public class Enemy extends GlobalPosition{
   }
   
   public void draw(Graphics2D g2d){
-	g2d.setColor(Color.black);
-    g2d.draw(enemyRect);
-    g2d.setColor(enemyColor);
-    g2d.fillRect(x+1, y+1, 30, 30);
+    g2d.drawImage(getEnemyImage(), x, y, null);
   }
 }

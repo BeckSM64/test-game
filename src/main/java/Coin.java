@@ -63,7 +63,7 @@ public class Coin extends GlobalPosition
   public Image getCoinImage()
   {
     ImageIcon i = new ImageIcon(getClass().getResource(coinImage));
-    Image newImage = resizeImage(i.getImage(), 40, 40);
+    Image newImage = resizeImage(i.getImage(), 70, 70);
     return newImage;
   }
   
