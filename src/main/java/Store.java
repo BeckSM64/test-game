@@ -11,11 +11,14 @@
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Color;
 import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.io.InputStream;
 
 import javax.swing.ImageIcon;
 
@@ -64,6 +67,9 @@ public class Store implements MouseMotionListener, MouseListener{
 	Color whiteTransparent;
 	Color optionFontColor;
 
+	// Fonts
+	Font retroComputer;
+
 	public Store(){
 		 whiteTransparent = new Color(255,255,255,200);
 		 darkBlueTransparent = new Color(20,15,36);
@@ -72,9 +78,20 @@ public class Store implements MouseMotionListener, MouseListener{
 		 storeButtonColor = darkBlueTransparent;
 		 storeButtonFontColor = whiteTransparent;
 		 storeSelected = false;
-		 font = new Font("Retro Computer", Font.PLAIN, 30);//Set font
-		 font1 = new Font("Retro Computer", Font.PLAIN, 18);
 		 shoesSelected = false;
+
+		 // Setup fonts
+		try {
+		InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
+		retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
+		} catch (FontFormatException e) {
+		e.printStackTrace();
+		} catch (IOException e) {
+		e.printStackTrace();
+		}
+
+		font = retroComputer.deriveFont(Font.PLAIN, 30);
+		font1 = retroComputer.deriveFont(Font.PLAIN, 18);
 	}
 	
 	public void update(){

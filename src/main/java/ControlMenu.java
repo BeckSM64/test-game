@@ -13,11 +13,14 @@ import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Random;
 
 public class ControlMenu implements MouseListener, MouseMotionListener, KeyListener{
@@ -33,8 +36,9 @@ public class ControlMenu implements MouseListener, MouseMotionListener, KeyListe
   Image newBackButtonImage = Game.resizeImage(k.getImage(), 50, 50);
   
   //Fonts
-  Font font = new Font("Retro Computer", Font.PLAIN, 70);
-  Font font1 = new Font("Retro Computer", Font.PLAIN, 20);
+  Font retroComputer;
+  Font font;
+  Font font1;
   
   int x;
   int y;
@@ -53,6 +57,19 @@ public class ControlMenu implements MouseListener, MouseMotionListener, KeyListe
     
     //Initialize random number generator
     randomGen = new Random();
+
+    // Setup fonts
+    try {
+      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
+      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
+    } catch (FontFormatException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    font = retroComputer.deriveFont(Font.PLAIN, 70);
+    font1 = retroComputer.deriveFont(Font.PLAIN, 20);
   }
   
   public void update(){

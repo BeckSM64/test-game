@@ -12,7 +12,11 @@ import java.util.LinkedList;
 import java.awt.Graphics2D;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Image;
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.swing.ImageIcon;
 import java.util.Random;
 
@@ -25,7 +29,8 @@ public class Controller{
   private String coinImage = "/images/coin.png";
   ImageIcon i = new ImageIcon(getClass().getResource(coinImage));
   Image newCoinImage = Game.resizeImage(i.getImage(), 50, 50);
-  static int coinCounter;//Keep track of the number of coins 
+  static int coinCounter;//Keep track of the number of coins
+  Font retroComputer;
     
   public Controller(){
 
@@ -35,6 +40,16 @@ public class Controller{
       addCoin(new Coin(randomGen.nextInt(630) + 50, randomGen.nextInt(480) + 50, randomGen.nextInt(6) + 1, randomGen.nextInt(6) + 1));
     }
     tempCoin = new Coin(10, 10, 1, 1);
+
+    // Setup font
+    try {
+      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
+      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
+    } catch (FontFormatException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
   
   public void update(){
@@ -62,7 +77,7 @@ public class Controller{
       tempCoin.draw(g2d);
     }
     if(Game.play){
-      Font font = new Font("Retro Computer", Font.PLAIN, 40);
+      Font font = retroComputer.deriveFont(Font.PLAIN, 48);
       g2d.setColor(Color.white);
       g2d.setFont(font);
       g2d.drawImage(newCoinImage, 250, 20, null);

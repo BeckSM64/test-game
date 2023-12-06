@@ -10,8 +10,11 @@
 
 import java.awt.Graphics2D;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.io.InputStream;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ public class Menu extends GlobalPosition{
   private String playerImage = "/images/player.png";
   ImageIcon i = new ImageIcon(getClass().getResource(playerImage));
   Image newPlayerImage = Game.resizeImage(i.getImage(), 500, 500);
+  Font retroComputer;
   
   public Menu(int x, int y){
     super(x, y);
@@ -49,6 +53,16 @@ public class Menu extends GlobalPosition{
     optionList.add("Controls");
     optionList.add("Highscores");
     optionList.add("Start");
+
+    // Setup font
+    try {
+      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
+      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
+    } catch (FontFormatException e) {
+      e.printStackTrace();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
   
   public void update(){
@@ -166,9 +180,9 @@ public class Menu extends GlobalPosition{
   public void draw(Graphics2D g2d){    
     //Menu with just text
     g2d.setColor(startColor);
-    Font font = new Font("Retro Computer", Font.PLAIN, 48);
-    Font font1 = new Font("Retro Computer", Font.PLAIN, 70);
-    Font font2 = new Font("Retro Computer", Font.PLAIN, 12);
+    Font font = retroComputer.deriveFont(Font.PLAIN, 48);
+    Font font1 = retroComputer.deriveFont(Font.PLAIN, 70);
+    Font font2 = retroComputer.deriveFont(Font.PLAIN, 12);
     g2d.setFont(font);
     g2d.drawString("START", x, y+65);
     g2d.setColor(highscoreColor);
