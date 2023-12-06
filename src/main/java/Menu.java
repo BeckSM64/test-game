@@ -38,7 +38,6 @@ public class Menu extends GlobalPosition{
   private String playerImage = "/images/player.png";
   ImageIcon i = new ImageIcon(getClass().getResource(playerImage));
   Image newPlayerImage = Game.resizeImage(i.getImage(), 500, 500);
-  Font retroComputer;
   
   public Menu(int x, int y){
     super(x, y);
@@ -53,16 +52,6 @@ public class Menu extends GlobalPosition{
     optionList.add("Controls");
     optionList.add("Highscores");
     optionList.add("Start");
-
-    // Setup font
-    try {
-      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (FontFormatException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
   
   public void update(){
@@ -180,10 +169,7 @@ public class Menu extends GlobalPosition{
   public void draw(Graphics2D g2d){    
     //Menu with just text
     g2d.setColor(startColor);
-    Font font = retroComputer.deriveFont(Font.PLAIN, 48);
-    Font font1 = retroComputer.deriveFont(Font.PLAIN, 70);
-    Font font2 = retroComputer.deriveFont(Font.PLAIN, 12);
-    g2d.setFont(font);
+    g2d.setFont(CustomFonts.font48);
     g2d.drawString("START", x, y+65);
     g2d.setColor(highscoreColor);
     g2d.drawString("HIGHSCORES", x, y+115);
@@ -192,10 +178,10 @@ public class Menu extends GlobalPosition{
     g2d.setColor(quitColor);
     g2d.drawString("QUIT", x, y+215);
     g2d.setColor(changeColorRandom());//Make start be a random color
-    g2d.setFont(font1);
+    g2d.setFont(CustomFonts.font70);
     g2d.drawString("[Coin Getter]", (Main.WIDTH/2) - 335, Main.HEIGHT/2);
     g2d.setColor(Color.white);
-    g2d.setFont(font2);
+    g2d.setFont(CustomFonts.font12);
     g2d.drawString("CREATED BY SHANE HARRINGTON", Main.WIDTH/2 + 82, Main.HEIGHT/2 + 20);
     //Draw player image
     g2d.drawImage(newPlayerImage, 450, 400, null);

@@ -30,7 +30,6 @@ public class Controller{
   ImageIcon i = new ImageIcon(getClass().getResource(coinImage));
   Image newCoinImage = Game.resizeImage(i.getImage(), 50, 50);
   static int coinCounter;//Keep track of the number of coins
-  Font retroComputer;
     
   public Controller(){
 
@@ -40,16 +39,6 @@ public class Controller{
       addCoin(new Coin(randomGen.nextInt(630) + 50, randomGen.nextInt(480) + 50, randomGen.nextInt(6) + 1, randomGen.nextInt(6) + 1));
     }
     tempCoin = new Coin(10, 10, 1, 1);
-
-    // Setup font
-    try {
-      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (FontFormatException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
   
   public void update(){
@@ -77,9 +66,8 @@ public class Controller{
       tempCoin.draw(g2d);
     }
     if(Game.play){
-      Font font = retroComputer.deriveFont(Font.PLAIN, 48);
       g2d.setColor(Color.white);
-      g2d.setFont(font);
+      g2d.setFont(CustomFonts.font48);
       g2d.drawImage(newCoinImage, 250, 20, null);
       g2d.drawString(": " + Controller.coinCounter, 310, 60);
     }

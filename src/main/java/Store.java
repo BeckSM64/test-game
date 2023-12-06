@@ -29,8 +29,6 @@ public class Store implements MouseMotionListener, MouseListener{
 	Rectangle storeMenu;
 	Color storeButtonColor;
 	Color storeButtonFontColor;
-	Font font;
-	Font font1;
 	String shoeImagePath = "/images/speedPowerUp.png";
     ImageIcon i = new ImageIcon(getClass().getResource(shoeImagePath));
     Image shoeImage = Game.resizeImage(i.getImage(), 75, 50);
@@ -67,9 +65,6 @@ public class Store implements MouseMotionListener, MouseListener{
 	Color whiteTransparent;
 	Color optionFontColor;
 
-	// Fonts
-	Font retroComputer;
-
 	public Store(){
 		 whiteTransparent = new Color(255,255,255,200);
 		 darkBlueTransparent = new Color(20,15,36);
@@ -79,19 +74,6 @@ public class Store implements MouseMotionListener, MouseListener{
 		 storeButtonFontColor = whiteTransparent;
 		 storeSelected = false;
 		 shoesSelected = false;
-
-		 // Setup fonts
-		try {
-		InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-		retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-		} catch (FontFormatException e) {
-		e.printStackTrace();
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-
-		font = retroComputer.deriveFont(Font.PLAIN, 30);
-		font1 = retroComputer.deriveFont(Font.PLAIN, 18);
 	}
 	
 	public void update(){
@@ -165,7 +147,7 @@ public class Store implements MouseMotionListener, MouseListener{
 		g2d.fillRect(211, yPosition+1, 379, 89);
 		g2d.drawImage(powerUpImage, 500, yPosition+20, null);
 		g2d.setColor(optionFontColor);
-		g2d.setFont(font1);
+		g2d.setFont(CustomFonts.font18);
 		g2d.drawString(itemName,220,yPosition+23);
 		g2d.drawString(itemDescription,220,yPosition+38);
 		g2d.drawImage(coinImage, 220, yPosition+48, null);
@@ -177,7 +159,7 @@ public class Store implements MouseMotionListener, MouseListener{
 		if(!storeSelected){
 			g2d.setColor(whiteTransparent);
 			g2d.draw(storeButton);
-			g2d.setFont(font);
+			g2d.setFont(CustomFonts.font30);
 			g2d.setColor(storeButtonColor);
 			g2d.fillRect(611, 511, 159, 89);
 			g2d.setColor(storeButtonFontColor);
@@ -187,7 +169,7 @@ public class Store implements MouseMotionListener, MouseListener{
 			g2d.setColor(whiteTransparent);
 			g2d.fillRect(611, 511, 159, 89);
 			g2d.setColor(storeButtonFontColor);
-			g2d.setFont(font);
+			g2d.setFont(CustomFonts.font30);
 			g2d.drawString("Store", storeButton.x + 18, storeButton.y + 58);
 			g2d.setColor(whiteTransparent);
 			g2d.draw(storeButton);

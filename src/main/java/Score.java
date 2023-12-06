@@ -18,20 +18,9 @@ import java.awt.Color;
 public class Score{
   
   static int currentScore;
-  Font retroComputer;
   
   public Score(){
     currentScore = 0;
-
-    // Setup font
-    try {
-      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (FontFormatException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
   
   public void update(){
@@ -39,8 +28,7 @@ public class Score{
   }
   
   public void draw(Graphics2D g2d){
-    Font font = retroComputer.deriveFont(Font.PLAIN, 40);
-    g2d.setFont(font);
+    g2d.setFont(CustomFonts.font40);
     g2d.setColor(Color.white);
     if(Player.playerAlive)
       g2d.drawString("SCORE: " + currentScore, 430, 60); 

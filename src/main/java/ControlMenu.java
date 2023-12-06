@@ -35,11 +35,6 @@ public class ControlMenu implements MouseListener, MouseMotionListener, KeyListe
   ImageIcon k = new ImageIcon(getClass().getResource(backButtonImage));
   Image newBackButtonImage = Game.resizeImage(k.getImage(), 50, 50);
   
-  //Fonts
-  Font retroComputer;
-  Font font;
-  Font font1;
-  
   int x;
   int y;
   
@@ -57,19 +52,6 @@ public class ControlMenu implements MouseListener, MouseMotionListener, KeyListe
     
     //Initialize random number generator
     randomGen = new Random();
-
-    // Setup fonts
-    try {
-      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (FontFormatException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-
-    font = retroComputer.deriveFont(Font.PLAIN, 70);
-    font1 = retroComputer.deriveFont(Font.PLAIN, 20);
   }
   
   public void update(){
@@ -78,11 +60,11 @@ public class ControlMenu implements MouseListener, MouseMotionListener, KeyListe
   
   public void draw(Graphics2D g2d){
     g2d.setColor(Color.white);
-    g2d.setFont(font);
+    g2d.setFont(CustomFonts.font70);
     g2d.drawString("CONTROLS", 150, 100);
     g2d.drawImage(newControlImage, x, y, null);
     g2d.drawImage(newPlayerImage, x + 240, y + 83, null);
-    g2d.setFont(font1);
+    g2d.setFont(CustomFonts.font20);
     g2d.drawString("Use the arrow keys (or WASD) to move.", 130, 400);
     g2d.drawString("That's pretty much it. Also, 'E' will", 130, 420);//420 :p
     g2d.drawString("open the store. Now go get some coins.", 130, 440);

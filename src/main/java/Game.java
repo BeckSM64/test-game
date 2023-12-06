@@ -65,9 +65,6 @@ public class Game extends JPanel implements ActionListener
   int r = 0;
   int gr = 0;
   int b = 0;
-
-  // Fonts
-  Font retroComputer;
   
   //Random Generator
   Random randomGen = new Random();
@@ -138,16 +135,6 @@ public class Game extends JPanel implements ActionListener
     //ImageIcon ic = new ImageIcon(getClass().getClassLoader().getResource("/images/player.png"));
     //Image i = ic.getImage();
     //Main.frame.setIconImage(i);
-
-    // Setup font
-    try {
-      InputStream is = getClass().getResourceAsStream("/fonts/RetroComputer.ttf");
-      retroComputer = Font.createFont(Font.TRUETYPE_FONT, is);
-    } catch (FontFormatException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
   }
   
   public void paint(Graphics g){
@@ -176,8 +163,7 @@ public class Game extends JPanel implements ActionListener
       cm.draw(g2d);
     }
     if(pauseSelected){
-        Font font = retroComputer.deriveFont(Font.PLAIN, 70);
-        g2d.setFont(font);
+        g2d.setFont(CustomFonts.font70);
         g2d.setColor(Color.white);
      g2d.drawString("PAUSE", 250, Main.HEIGHT/2);
      for(int i = 0; i < Player.powerUpList.size(); i++){
